@@ -16,4 +16,4 @@ I ended up implementing a combination of CBOR + LZW + base62.
 
 BBOR62 is efficient, portable and URL-safe.
 
-For more details, see https://www.goudvuur.be/resource/Project/bbor62?lang=nl
+For more details, see https://www.goudvuur.be/resource/Project/bbor62
