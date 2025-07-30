@@ -94,6 +94,16 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.github.tommyettinger</groupId>
+            <artifactId>blazingchain</artifactId>
+            <version>1.4.4.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.upokecenter</groupId>
+            <artifactId>cbor</artifactId>
+            <version>5.0.0-alpha2</version>
+        </dependency>
     </dependencies>
 
 </project>

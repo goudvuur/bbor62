@@ -31,10 +31,10 @@ public class CborTest
     // Example usage and unit tests
     public static void main(String[] args) throws Exception
     {
-        LZW lzw = new LZW(LZW.DEFAULT_CONFIG);
-        BaseXStream.Decoder stream = new BaseXStream.Decoder("ZbwUDN153Jja07kY8yI69s302d61aa93ClEuIjl51Ee", BaseXStream.DEFAULT_CONFIG);
-        Object result = new Bbor.Decoder(Bbor.DEFAULT_CONFIG).read(stream, lzw);
-        Logger.log(result);
+//        LZW lzw = new LZW(LZW.DEFAULT_CONFIG);
+//        BaseXStream.Decoder stream = new BaseXStream.Decoder("ZbwUDN153Jja07kY8yI69s302d61aa93ClEuIjl51Ee", BaseXStream.DEFAULT_CONFIG);
+//        Object result = new Bbor.Decoder(Bbor.DEFAULT_CONFIG).read(stream, lzw);
+//        Logger.log(result);
 
         List<String> samples = new ArrayList<>();
 
