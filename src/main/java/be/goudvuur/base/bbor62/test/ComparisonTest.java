@@ -105,50 +105,49 @@ public class ComparisonTest
             String compressedCbor64 = BaseEncoding.base64().encode(CBORObject.FromJSONString(sample).EncodeToBytes());
             String compressedCbor62 = encodeToBase62(CBORObject.FromJSONString(sample).EncodeToBytes());
 
-
             Logger.log("Compression ratios: ");
             Logger.log(SEP);
 
-            //            Logger.log("\toriginal: " + sample);
-            //            Logger.log("\toriginal: " + ((float) sample.length() / sample.length() * 100) + "%");
+            Logger.log("\toriginal: " + sample);
+            Logger.log("\toriginal: " + ((float) sample.length() / sample.length() * 100) + "%");
 
-            //            Logger.log("\tbase64: " + compressedBase64);
-            //            Logger.log(SEP);
+            Logger.log("\tbase64: " + compressedBase64);
+            Logger.log(SEP);
             Logger.log("\tbase64: " + ((float) compressedBase64.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            //            Logger.log("\tbase62: " + compressedBase62);
-            //            Logger.log(SEP);
+            Logger.log("\tbase62: " + compressedBase62);
+            Logger.log(SEP);
             Logger.log("\tbase62: " + ((float) compressedBase62.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            //            Logger.log("\tlz-string utf-16: " + compressedLz);
-            //            Logger.log(SEP);
-            //            Logger.log("\tlz-string utf-16: " + ((float) compressedLz.length() / sample.length() * 100) + "%");
-            //            Logger.log(SEP);
+            Logger.log("\tlz-string utf-16: " + compressedLz);
+            Logger.log(SEP);
+            Logger.log("\tlz-string utf-16: " + ((float) compressedLz.length() / sample.length() * 100) + "%");
+            Logger.log(SEP);
 
-            //            Logger.log("\tlz-string base64: " + compressedLz64);
-            //            Logger.log(SEP);
-            //            Logger.log("\tlz-string base64: " + ((float) compressedLz64.length() / sample.length() * 100) + "%");
-            //            Logger.log(SEP);
+            Logger.log("\tlz-string base64: " + compressedLz64);
+            Logger.log(SEP);
+            Logger.log("\tlz-string base64: " + ((float) compressedLz64.length() / sample.length() * 100) + "%");
+            Logger.log(SEP);
 
-            //            Logger.log("\tlz-string uri: " + compressedLzUri);
-            //            Logger.log(SEP);
+            Logger.log("\tlz-string uri: " + compressedLzUri);
+            Logger.log(SEP);
             Logger.log("\tlz-string uri: " + ((float) compressedLzUri.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            //            Logger.log("\tcbor base64: " + compressedCbor64);
-            //            Logger.log(SEP);
+            Logger.log("\tcbor base64: " + compressedCbor64);
+            Logger.log(SEP);
             Logger.log("\tcbor base64: " + ((float) compressedCbor64.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            //            Logger.log("\tcbor base62: " + compressedCbor62);
-            //            Logger.log(SEP);
+            Logger.log("\tcbor base62: " + compressedCbor62);
+            Logger.log(SEP);
             Logger.log("\tcbor base62: " + ((float) compressedCbor62.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            //            Logger.log("\tbbor62: " + compressedBbor62);
-            //            Logger.log(SEP);
+            Logger.log("\tbbor62: " + compressedBbor62);
+            Logger.log(SEP);
             Logger.log("\tbbor62: " + ((float) compressedBbor62.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
         }
