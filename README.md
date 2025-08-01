@@ -24,7 +24,22 @@ BBOR62 is efficient, portable and URL-safe.
 Below, you find a few compression comparisons ratios (and extra details) when encoding this JSON sample:  
 *(see class be.goudvuur.base.bbor62.test.ComparisonTest)*
 
-### Source JSON to encode
+### Comparison overview
+*(continue reading below the JSON sample for more details)*
+
+| Encoder           | Compressed chars | Compression ratio |
+|-------------------|------------------|-------------------|
+| base64            | 2152             | 133.33%           |
+| base62            | 2169             | 134.38%           |
+| lz-string utf-16  | 411              | 25.46%            |
+| lz-string uri     | 1096             | 67.90%            |
+| cbor base64       | 1076             | 66.66%            |
+| cbor base62       | 1082             | 67.03%            |
+| bbor62 string     | 1071             | 66.35%            |
+| **bbor62 object** | **769**          | **47.64%**        |
+
+
+### Sample JSON to encode
 ```
 {
   "organization": {
