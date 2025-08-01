@@ -29,6 +29,7 @@ Below, you find a few compression comparisons ratios (and extra details) when en
 
 | Encoder           | Compressed chars | Compression ratio |
 |-------------------|------------------|-------------------|
+| original          | 1614             | 100.00%           |
 | base64            | 2152             | 133.33%           |
 | base62            | 2169             | 134.38%           |
 | lz-string utf-16  | 411              | 25.46%            |
