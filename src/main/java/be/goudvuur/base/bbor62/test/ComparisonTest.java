@@ -3,12 +3,15 @@ package be.goudvuur.base.bbor62.test;
 import be.goudvuur.base.bbor62.Bbor62;
 import be.goudvuur.base.bbor62.Logger;
 import blazing.chain.LZSEncoding;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.BaseEncoding;
 import com.upokecenter.cbor.CBORObject;
 
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * Created by bram on Jul 30, 2025
@@ -95,13 +98,16 @@ public class ComparisonTest
     {
         for (String sample : SAMPLES) {
 
-            String compressedBbor62 = Bbor62.encode(sample);
+            String compressedBbor62Str = Bbor62.encode(sample);
+            String compressedBbor62Obj = Bbor62.encode(new ObjectMapper().readValue(sample, Map.class));
+
+            String compressedBase64 = BaseEncoding.base64().encode(sample.getBytes(StandardCharsets.UTF_8));
+            String compressedBase62 = encodeToBase62(sample.getBytes(StandardCharsets.UTF_8));
 
             String compressedLz = LZSEncoding.compress(sample);
             String compressedLz64 = LZSEncoding.compressToBase64(sample);
             String compressedLzUri = LZSEncoding.compressToEncodedURIComponent(sample);
-            String compressedBase64 = BaseEncoding.base64().encode(sample.getBytes(StandardCharsets.UTF_8));
-            String compressedBase62 = encodeToBase62(sample.getBytes(StandardCharsets.UTF_8));
+
             String compressedCbor64 = BaseEncoding.base64().encode(CBORObject.FromJSONString(sample).EncodeToBytes());
             String compressedCbor62 = encodeToBase62(CBORObject.FromJSONString(sample).EncodeToBytes());
 
@@ -146,9 +152,14 @@ public class ComparisonTest
             Logger.log("\tcbor base62: " + ((float) compressedCbor62.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            Logger.log("\tbbor62: " + compressedBbor62);
+            Logger.log("\tbbor62 string: " + compressedBbor62Str);
             Logger.log(SEP);
-            Logger.log("\tbbor62: " + ((float) compressedBbor62.length() / sample.length() * 100) + "%");
+            Logger.log("\tbbor62 string: " + ((float) compressedBbor62Str.length() / sample.length() * 100) + "%");
+            Logger.log(SEP);
+
+            Logger.log("\tbbor62 object: " + compressedBbor62Obj);
+            Logger.log(SEP);
+            Logger.log("\tbbor62 object: " + ((float) compressedBbor62Obj.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
         }
     }
