@@ -17,7 +17,7 @@ I ended up implementing my own encoder as a combination of CBOR + LZW + base62.
 
 BBOR62 is efficient, portable and URL-safe.
 
-<!--Implementation details will be discussed here (in Dutch) https://www.goudvuur.be/resource/Project/bbor62-->
+A nood-friendly introduction to the algorithm is found here (in Dutch) https://www.goudvuur.be/resource/Project/bbor62
 
 ---
 ## Comparison with other encoders/compressors
