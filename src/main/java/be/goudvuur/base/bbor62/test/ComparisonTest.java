@@ -84,7 +84,21 @@ public class ComparisonTest
                     "      \"projected2024\": 9223372036854775807\n" +
                     "    }\n" +
                     "  }\n" +
-                    "}"
+                    "}",
+                    "{\n" +
+                    "  \"naam\": \"Bob\",\n" +
+                    "  \"leeftijd\": 42,\n" +
+                    "  \"email\": \"bob@example.com\",\n" +
+                    "  \"adres\": {\n" +
+                    "    \"straat\": \"Stationsstraat\",\n" +
+                    "    \"nummer\": 12,\n" +
+                    "    \"stad\": \"Gent\",\n" +
+                    "    \"postcode\": \"9000\"\n" +
+                    "  },\n" +
+                    "  \"interesses\": [\"filosofie\", \"Jurassic Park\", \"trailrunning\", \"\uD83D\uDD25Goudvuur uitvindingen\uD83D\uDD25\"],\n" +
+                    "  \"isActief\": true\n" +
+                    "}",
+                    "\uD83D\uDD25❤\uFE0F\uD83D\uDD25❤\uFE0F\uD83D\uDD25 Goudvuur uitvindingen \uD83D\uDD25❤\uFE0F\uD83D\uDD25❤\uFE0F\uD83D\uDD25"
     };
 
     private static final String SEP = "_______________________________________________________________________________";
@@ -98,8 +112,13 @@ public class ComparisonTest
     {
         for (String sample : SAMPLES) {
 
+            boolean isJson = sample.startsWith("{");
+
             String compressedBbor62Str = Bbor62.encode(sample);
-            String compressedBbor62Obj = Bbor62.encode(new ObjectMapper().readValue(sample, Map.class));
+            String compressedBbor62Obj = null;
+            if (isJson) {
+                compressedBbor62Obj = Bbor62.encode(new ObjectMapper().readValue(sample, Map.class));
+            }
 
             String compressedBase64 = BaseEncoding.base64().encode(sample.getBytes(StandardCharsets.UTF_8));
             String compressedBase62 = encodeToBase62(sample.getBytes(StandardCharsets.UTF_8));
@@ -108,13 +127,19 @@ public class ComparisonTest
             String compressedLz64 = LZSEncoding.compressToBase64(sample);
             String compressedLzUri = LZSEncoding.compressToEncodedURIComponent(sample);
 
-            String compressedCbor64 = BaseEncoding.base64().encode(CBORObject.FromJSONString(sample).EncodeToBytes());
-            String compressedCbor62 = encodeToBase62(CBORObject.FromJSONString(sample).EncodeToBytes());
+            String compressedCbor64 = null;
+            String compressedCbor62 = null;
+            if (isJson) {
+                compressedCbor64 = BaseEncoding.base64().encode(CBORObject.FromJSONString(sample).EncodeToBytes());
+                compressedCbor62 = encodeToBase62(CBORObject.FromJSONString(sample).EncodeToBytes());
+            }
 
             Logger.log("Compression ratios: ");
             Logger.log(SEP);
 
-            Logger.log("\toriginal: " + sample);
+            Logger.log(sample);
+            Logger.log("");
+            Logger.log("\tJSON?: " + isJson);
             Logger.log("\toriginal: " + ((float) sample.length() / sample.length() * 100) + "%");
 
             Logger.log("\tbase64: " + compressedBase64);
@@ -142,25 +167,34 @@ public class ComparisonTest
             Logger.log("\tlz-string uri: " + ((float) compressedLzUri.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            Logger.log("\tcbor base64: " + compressedCbor64);
-            Logger.log(SEP);
-            Logger.log("\tcbor base64: " + ((float) compressedCbor64.length() / sample.length() * 100) + "%");
-            Logger.log(SEP);
+            if (compressedCbor64 != null) {
+                Logger.log("\tcbor base64: " + compressedCbor64);
+                Logger.log(SEP);
+                Logger.log("\tcbor base64: " + ((float) compressedCbor64.length() / sample.length() * 100) + "%");
+                Logger.log(SEP);
+            }
 
-            Logger.log("\tcbor base62: " + compressedCbor62);
-            Logger.log(SEP);
-            Logger.log("\tcbor base62: " + ((float) compressedCbor62.length() / sample.length() * 100) + "%");
-            Logger.log(SEP);
+            if (compressedCbor62 != null) {
+                Logger.log("\tcbor base62: " + compressedCbor62);
+                Logger.log(SEP);
+                Logger.log("\tcbor base62: " + ((float) compressedCbor62.length() / sample.length() * 100) + "%");
+                Logger.log(SEP);
+            }
 
             Logger.log("\tbbor62 string: " + compressedBbor62Str);
             Logger.log(SEP);
             Logger.log("\tbbor62 string: " + ((float) compressedBbor62Str.length() / sample.length() * 100) + "%");
             Logger.log(SEP);
 
-            Logger.log("\tbbor62 object: " + compressedBbor62Obj);
-            Logger.log(SEP);
-            Logger.log("\tbbor62 object: " + ((float) compressedBbor62Obj.length() / sample.length() * 100) + "%");
-            Logger.log(SEP);
+            if (compressedBbor62Obj != null) {
+                Logger.log("\tbbor62 object: " + compressedBbor62Obj);
+                Logger.log(SEP);
+                Logger.log("\tbbor62 object: " + ((float) compressedBbor62Obj.length() / sample.length() * 100) + "%");
+                Logger.log(SEP);
+            }
+
+            Logger.log("");
+            Logger.log("");
         }
     }
 
